@@ -1,0 +1,14 @@
+# Environnement conda du projet.
+# Création (macOS Apple Silicon : OpenMC n'existe qu'en osx-64 sur conda-forge,
+# les binaires Intel sont exécutés via Rosetta 2) :
+#   conda env create --platform osx-64 -f environment.yml
+# Linux / macOS Intel : retirer l'option --platform.
+name: openmc-env
+channels:
+  - conda-forge
+dependencies:
+  - openmc=0.16
+  - jupyter
+  - ipykernel
+  - matplotlib
+  - pandas

@@ -1,0 +1,36 @@
+# ---------------------------------------------------------------
+# Données nucléaires (plusieurs Go, téléchargées séparément)
+# ---------------------------------------------------------------
+nuclear_data/
+endfb-*/
+*.tar.xz
+
+# ---------------------------------------------------------------
+# Fichiers générés par OpenMC à chaque exécution
+#   - entrées : materials.xml, geometry.xml, settings.xml, tallies.xml,
+#               plots.xml, model.xml, chaînes d'épuisement (chain*.xml)
+#   - sorties : statepoint.*.h5, summary.h5, depletion_results.h5,
+#               source.h5, tallies.out, images de géométrie (.ppm)
+# Tout est reproductible en relançant les notebooks.
+# Les résultats à conserver sont exportés en PNG/CSV dans results/.
+# ---------------------------------------------------------------
+*.xml
+*.h5
+*.ppm
+tallies.out
+
+# ---------------------------------------------------------------
+# Python / Jupyter
+# ---------------------------------------------------------------
+__pycache__/
+*.py[cod]
+.ipynb_checkpoints/
+
+# ---------------------------------------------------------------
+# Système et éditeur
+# ---------------------------------------------------------------
+.DS_Store
+.vscode/
+
+# Mémo de contexte pour Claude Code (local uniquement)
+CLAUDE.md
