@@ -35,7 +35,7 @@ physiquement les résultats :
 | Coefficient du modérateur | [`02b_coefficient_moderateur.ipynb`](notebooks/02b_coefficient_moderateur.ipynb) | α_mod = −36 pcm/K sans bore, s'annule à 2195 ± 50 ppm de bore ; effet dû à la densité de l'eau |
 | Coefficient Doppler | [`02c_doppler.ipynb`](notebooks/02c_doppler.ipynb) | α_D = −2,0 pcm/K à 900 K, loi approchée en √T ; captures résonnantes de l'U-238 +19 % entre 294 et 2500 K |
 | Assemblage 17×17 | [`03_assemblage_17x17.ipynb`](notebooks/03_assemblage_17x17.ipynb) | k∞ = 1,2739 ± 0,0002 ; F_xy = 1,061 ; convergence de la source : 3 générations (assemblage) contre ≈ 55 (rangée de 9 assemblages) |
-| Épuisement | `04_…` | … |
+| Épuisement | [`04_epuisement.ipynb`](notebooks/04_epuisement.ipynb) | Jusqu'à 50 GWj/t : empoisonnement Xe + Sm ≈ 3 300 pcm, puis ≈ −680 pcm par GWj/t ; U-235 de 4 % à 0,76 % ; 14,3 kg/t de plutonium, qui assure les deux tiers des fissions en fin d'irradiation |
 
 ### Assemblage 17×17 : géométrie et carte de puissance
 
@@ -47,6 +47,14 @@ physiquement les résultats :
 
 Les crayons voisins des 24 tubes guides (« trous d'eau ») sont les plus puissants ; F_xy = 1,061, avec une incertitude
 d'environ 0,3 % par crayon.
+
+### Épuisement : le plutonium prend le relais de l'uranium 235
+
+![Part des fissions par nucléide en fonction du taux de combustion](results/04_epuisement/fissions.png)
+
+Au fil de l'irradiation, l'U-235 s'épuise et le Pu-239 formé par capture sur l'U-238 fissionne à son tour : à
+50 GWj/t, les deux tiers des fissions viennent du plutonium. Le notebook montre aussi qu'un calcul des taux de
+réaction par flux multigroupe, sans autoprotection, surestime de 30 % la production de plutonium.
 
 ### Spectre neutronique d'une cellule crayon
 
@@ -65,12 +73,14 @@ et pic des neutrons de fission vers 1–2 MeV.
 │   ├── 02a_enrichissement_bore.ipynb
 │   ├── 02b_coefficient_moderateur.ipynb
 │   ├── 02c_doppler.ipynb
-│   └── 03_assemblage_17x17.ipynb
+│   ├── 03_assemblage_17x17.ipynb
+│   └── 04_epuisement.ipynb
 ├── results/                    # figures (PNG) et tableaux (CSV), un dossier par notebook
 │   ├── 01_pin_cell/
 │   ├── 02a_enrichissement_bore/
 │   ├── …
-│   └── 03_assemblage_17x17/
+│   ├── 03_assemblage_17x17/
+│   └── 04_epuisement/
 ├── src/                        # code Python commun aux notebooks
 │   ├── materiaux.py            #   matériaux (UO₂, Zircaloy-4, eau borée…)
 │   ├── geometrie.py            #   cellule crayon
@@ -112,11 +122,15 @@ export OPENMC_CROSS_SECTIONS=~/nuclear_data/endfb-viii.0-hdf5/cross_sections.xml
 
 (ajouter la ligne `export` à `~/.zshrc` ou `~/.bash_profile` pour la rendre permanente).
 
+Pour le notebook 04 (épuisement), télécharger aussi la **chaîne d'évolution simplifiée REP**
+(*Simplified Chain*, « Thermal spectrum », ≈ 1 Mo) depuis la même page, et l'enregistrer sous
+`~/nuclear_data/chaines/chain_casl_pwr.xml`.
+
 ### 3. Exécution
 
 Ouvrir les notebooks dans VS Code ou Jupyter avec le noyau `openmc-env` et les exécuter dans l'ordre.
 Les fichiers XML et HDF5 produits par OpenMC ne sont pas versionnés : la première exécution les génère dans
-`runs/` (environ 15 min au total), les suivantes réutilisent les calculs dont les entrées n'ont pas changé.
+`runs/` (environ 15 min pour les notebooks 01 à 03, 35 min pour le 04), les suivantes réutilisent les calculs dont les entrées n'ont pas changé.
 
 ## Références
 

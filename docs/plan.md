@@ -171,8 +171,12 @@ un REP est-il naturellement stable ?
 - Module `openmc.deplete` : un `CoupledOperator` relie le transport (OpenMC) et l'évolution isotopique
   (équations de Bateman), et un intégrateur en temps (`PredictorIntegrator` pour commencer, `CECMIntegrator`
   pour plus de précision) avance par pas de burn-up.
-- **Chaîne d'évolution** : le fichier XML « thermal spectrum » d'ENDF/B-VIII.0, téléchargé depuis
-  [openmc.org/data](https://openmc.org/data/) et rangé dans `~/nuclear_data/` (hors dépôt).
+- **Chaîne d'évolution** : la chaîne **simplifiée** REP (228 nucléides, benchmark VERA/CASL, « thermal spectrum »),
+  téléchargée depuis [openmc.org/data](https://openmc.org/data/) dans `~/nuclear_data/chaines/` (hors dépôt). La chaîne
+  complète ENDF/B-VIII.0 (3 820 nucléides, 27 Mo) a aussi été téléchargée, mais n'est pas utilisée.
+- **Taux de réaction** (réalisé) : mode `flux` (361 groupes SHEM) avec captures et fissions des actinides
+  comptabilisées directement (mode « mixte »). Le mode `flux` pur surestime de ≈ 30 % les captures de l'U-238
+  (pas d'autoprotection dans les groupes) : comparaison détaillée dans le notebook.
 - **Normalisation en puissance** : puissance linéique d'un crayon moyen de REP, environ 180 W/cm, soit environ
   40 W/g de métal lourd (à préciser en le calculant). Les volumes des matériaux sont déjà définis dans
   `src/geometrie.py`.
