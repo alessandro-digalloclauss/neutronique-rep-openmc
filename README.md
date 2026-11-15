@@ -72,14 +72,15 @@ et pic des neutrons de fission vers 1–2 MeV.
 │   ├── …
 │   └── 03_assemblage_17x17/
 ├── src/                        # code Python commun aux notebooks
-│   ├── materials.py            #   matériaux (UO₂, Zircaloy-4, eau borée…)
-│   ├── geometry.py             #   cellule crayon
-│   ├── assembly.py             #   assemblage 17×17 et rangée d'assemblages
+│   ├── materiaux.py            #   matériaux (UO₂, Zircaloy-4, eau borée…)
+│   ├── geometrie.py            #   cellule crayon
+│   ├── assemblage.py           #   assemblage 17×17 et rangée d'assemblages
 │   ├── modeles.py              #   modèles OpenMC complets, paramétrés
 │   ├── calcul.py               #   lancement des calculs, avec cache des résultats
 │   └── style.py                #   style commun des figures
 ├── docs/plan.md                # plan détaillé des études
-└── environment.yml             # environnement conda reproductible
+├── environment.yml             # environnement conda reproductible
+└── LICENSE                     # licence MIT
 ```
 
 Les calculs OpenMC écrivent leurs fichiers (XML, HDF5) dans `runs/`, un dossier non versionné, avec la même
@@ -126,3 +127,8 @@ Les fichiers XML et HDF5 produits par OpenMC ne sont pas versionnés : la premi�
 - Documentation OpenMC : <https://docs.openmc.org/>
 - Exemples officiels OpenMC : <https://github.com/openmc-dev/openmc/wiki/Example-Jupyter-Notebooks>
 - Plan détaillé des études à venir : [`docs/plan.md`](docs/plan.md)
+
+## Licence
+
+Code et notebooks distribués sous licence [MIT](LICENSE) : libre réutilisation, à condition de citer la source.
+Les données nucléaires ENDF/B-VIII.0 ne font pas partie du dépôt et restent soumises à leurs propres conditions.

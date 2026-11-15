@@ -6,8 +6,8 @@ recherches de criticité (notebooks 02).
 """
 import openmc
 
-from src.geometry import HAUTEUR, cellule_crayon
-from src.materials import (
+from src.geometrie import HAUTEUR, cellule_crayon
+from src.materiaux import (
     P_PRIMAIRE,
     T_COMBUSTIBLE,
     T_GAINE,
@@ -85,8 +85,8 @@ def modele_assemblage(
     (utile pour étudier la convergence de la source).
     Renvoie (modele, cellules).
     """
-    from src.assembly import N, assemblage_17x17
-    from src.geometry import PAS
+    from src.assemblage import N, assemblage_17x17
+    from src.geometrie import PAS
 
     combustible = combustible_uo2(enrichissement=enrichissement, temperature=t_combustible)
     helium = helium_jeu(temperature=T_GAINE)
@@ -115,7 +115,7 @@ def modele_rangee(n_assemblages=9, source_ponctuelle=(0.0, 0.0, 0.0), enrichisse
 
     Renvoie (modele, longueur) ; longueur = dimension de la rangée selon x (cm).
     """
-    from src.assembly import rangee_assemblages
+    from src.assemblage import rangee_assemblages
 
     combustible = combustible_uo2(enrichissement=enrichissement)
     helium, gaine = helium_jeu(), zircaloy4()

@@ -5,7 +5,7 @@ commande) et 1 tube d'instrumentation central, sur un réseau de pas 1,26 cm.
 """
 import openmc
 
-from src.geometry import HAUTEUR, PAS, R_GAINE_EXT, R_GAINE_INT, R_PASTILLE
+from src.geometrie import HAUTEUR, PAS, R_GAINE_EXT, R_GAINE_INT, R_PASTILLE
 
 N = 17                        # crayons par côté
 PAS_ASSEMBLAGE = 21.50        # cm : pas entre assemblages (lame d'eau incluse)

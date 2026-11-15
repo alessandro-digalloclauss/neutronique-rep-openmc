@@ -113,7 +113,7 @@ un REP est-il naturellement stable ?
   d'instrumentation** central (tubes en Zircaloy remplis d'eau, rayons environ 0,561 et 0,602 cm).
 - `openmc.RectLattice` de 17×17 universes (crayon, tube guide), pas de 1,26 cm, lame d'eau entre assemblages
   (pas d'assemblage d'environ 21,50 cm), bords réfléchissants : on calcule le **k∞ d'un réseau infini d'assemblages**.
-- Code : `src/assembly.py`, avec la carte des positions des tubes guides.
+- Code : `src/assemblage.py`, avec la carte des positions des tubes guides.
 
 ### Résultats
 
@@ -175,7 +175,7 @@ un REP est-il naturellement stable ?
   [openmc.org/data](https://openmc.org/data/) et rangé dans `~/nuclear_data/` (hors dépôt).
 - **Normalisation en puissance** : puissance linéique d'un crayon moyen de REP, environ 180 W/cm, soit environ
   40 W/g de métal lourd (à préciser en le calculant). Les volumes des matériaux sont déjà définis dans
-  `src/geometry.py`.
+  `src/geometrie.py`.
 - **Pas de temps** : des pas courts au début (quelques heures, puis quelques jours) pour capter la mise à
   l'équilibre du **xénon-135** et du **samarium-149**, puis des pas plus longs jusqu'à environ 50–60 GWj/t.
 - Modèle : la cellule crayon (environ 20 à 30 pas × 1 à 2 min, faisable). L'assemblage en épuisement sera
@@ -195,7 +195,7 @@ un REP est-il naturellement stable ?
 
 ### Pièges
 
-- Ne pas oublier `depletable = True` (déjà fait dans `src/materials.py`) et les volumes.
+- Ne pas oublier `depletable = True` (déjà fait dans `src/materiaux.py`) et les volumes.
 - Les résultats sont dans `depletion_results.h5` : on les lit avec `openmc.deplete.Results`.
 - Vérifier la convergence en pas de temps : refaire le calcul avec des pas deux fois plus petits et comparer.
 
