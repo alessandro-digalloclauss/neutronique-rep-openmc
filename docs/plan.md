@@ -24,7 +24,8 @@ ils dépendent des conditions exactes et doivent être recoupés avec la littér
   `openmc.SlicePlot` / `openmc.VoxelPlot` pour le traceur intégré.
 - **Avant de publier** : *Restart + Run All*, puis vérifier que les chiffres cités dans le texte
   correspondent aux sorties.
-- **Exporter** les résultats chiffrés en CSV et les figures en PNG dans `results/`, préfixés par le numéro du notebook.
+- **Exporter** les résultats chiffrés en CSV et les figures en PNG dans `results/NN_nom/`, un dossier par
+  notebook (même nom que le notebook et que son dossier de calcul `runs/NN_nom/`).
 - **Coût de calcul** : sur le Mac (10 cœurs, x86_64 via Rosetta), le notebook 01 traite environ 35 000 neutrons/s.
   Un point de calcul de cellule crayon (3 M d'histoires) prend environ 2 min.
 
@@ -96,9 +97,9 @@ un REP est-il naturellement stable ?
 
 ### Code à ajouter dans `src/`
 
-- `src/runs.py` : une fonction `calcul_k(modele, dossier, ...)` qui lance un calcul et renvoie k∞, σ et le
-  chemin du statepoint, pour éviter de recopier le même bloc dans chaque balayage.
-- Une fonction de construction de modèle paramétrée, pour `search_for_keff`.
+- `src/calcul.py` : `calculer_k(modele, dossier)` lance un calcul et renvoie k∞, σ et le chemin du statepoint
+  (avec cache) ; `recherche_keff` enveloppe `Model.keff_search` (avec cache).
+- `src/modeles.py` : construction de modèles paramétrés, pour les balayages et `keff_search`.
 
 ---
 

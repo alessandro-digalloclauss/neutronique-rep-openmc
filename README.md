@@ -40,17 +40,17 @@ physiquement les résultats :
 ### Assemblage 17×17 : géométrie et carte de puissance
 
 <p align="center">
-  <img src="results/03_rendu_3d.png" width="45%" alt="Rendu 3D de l'assemblage 17×17">
+  <img src="results/03_assemblage_17x17/rendu_3d.png" width="45%" alt="Rendu 3D de l'assemblage 17×17">
 </p>
 
-![Carte de puissance crayon par crayon et incertitudes](results/03_carte_puissance.png)
+![Carte de puissance crayon par crayon](results/03_assemblage_17x17/carte_puissance.png)
 
 Les crayons voisins des 24 tubes guides (« trous d'eau ») sont les plus puissants ; F_xy = 1,061, avec une incertitude
 d'environ 0,3 % par crayon.
 
 ### Spectre neutronique d'une cellule crayon
 
-![Spectre du flux en énergie dans le combustible et le modérateur](results/01_spectre_flux.png)
+![Spectre du flux en énergie dans le combustible et le modérateur](results/01_pin_cell/spectre_flux.png)
 
 Flux par unité de léthargie : bosse thermique (~0,1 eV), plateau de ralentissement en 1/E creusé par les
 résonances de capture de l'U-238 (6,67, 20,9, 36,7 eV…), plus marquées dans le combustible (autoprotection),
@@ -60,12 +60,30 @@ et pic des neutrons de fission vers 1–2 MeV.
 
 ```text
 .
-├── notebooks/        # études, numérotées dans l'ordre de lecture
-├── src/              # fonctions Python réutilisables (matériaux, géométries…)
-├── results/          # figures et tableaux exportés
-├── docs/             # plan du projet, notes de méthode
-└── environment.yml   # environnement conda reproductible
+├── notebooks/                  # études, numérotées dans l'ordre de lecture
+│   ├── 01_pin_cell.ipynb
+│   ├── 02a_enrichissement_bore.ipynb
+│   ├── 02b_coefficient_moderateur.ipynb
+│   ├── 02c_doppler.ipynb
+│   └── 03_assemblage_17x17.ipynb
+├── results/                    # figures (PNG) et tableaux (CSV), un dossier par notebook
+│   ├── 01_pin_cell/
+│   ├── 02a_enrichissement_bore/
+│   ├── …
+│   └── 03_assemblage_17x17/
+├── src/                        # code Python commun aux notebooks
+│   ├── materials.py            #   matériaux (UO₂, Zircaloy-4, eau borée…)
+│   ├── geometry.py             #   cellule crayon
+│   ├── assembly.py             #   assemblage 17×17 et rangée d'assemblages
+│   ├── modeles.py              #   modèles OpenMC complets, paramétrés
+│   ├── calcul.py               #   lancement des calculs, avec cache des résultats
+│   └── style.py                #   style commun des figures
+├── docs/plan.md                # plan détaillé des études
+└── environment.yml             # environnement conda reproductible
 ```
+
+Les calculs OpenMC écrivent leurs fichiers (XML, HDF5) dans `runs/`, un dossier non versionné, avec la même
+organisation par notebook.
 
 ## Reproduire les calculs
 
@@ -96,7 +114,8 @@ export OPENMC_CROSS_SECTIONS=~/nuclear_data/endfb-viii.0-hdf5/cross_sections.xml
 ### 3. Exécution
 
 Ouvrir les notebooks dans VS Code ou Jupyter avec le noyau `openmc-env` et les exécuter dans l'ordre.
-Les fichiers XML et HDF5 produits par OpenMC ne sont pas versionnés : ils sont régénérés à chaque exécution.
+Les fichiers XML et HDF5 produits par OpenMC ne sont pas versionnés : la première exécution les génère dans
+`runs/` (environ 15 min au total), les suivantes réutilisent les calculs dont les entrées n'ont pas changé.
 
 ## Références
 
