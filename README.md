@@ -92,3 +92,5 @@ Les fichiers XML et HDF5 produits par OpenMC ne sont pas versionnés : ils sont 
 - D. A. Brown et al., *ENDF/B-VIII.0: The 8th Major Release of the Nuclear Reaction Data Library*,
   Nuclear Data Sheets 148 (2018) 1–142.
 - Documentation OpenMC : <https://docs.openmc.org/>
+- Exemples officiels OpenMC : <https://github.com/openmc-dev/openmc/wiki/Example-Jupyter-Notebooks>
+- Plan détaillé des études à venir : [`docs/plan.md`](docs/plan.md)
