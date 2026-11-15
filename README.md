@@ -31,7 +31,8 @@ physiquement les résultats :
 | Étude | Notebook | Résultat principal |
 |---|---|---|
 | Cellule crayon UO₂ 4 % | [`01_pin_cell.ipynb`](notebooks/01_pin_cell.ipynb) | k∞ = 1,2647 ± 0,0006 (1σ), à 1000 ppm de bore et 580 K |
-| Études paramétriques | `02_…` | … |
+| Enrichissement et bore | [`02a_enrichissement_bore.ipynb`](notebooks/02a_enrichissement_bore.ipynb) | Bore critique (réseau infini, UO₂ 4 %) : 5032 ± 9 ppm par ajustement, 5029 ppm par recherche GRsecant ; efficacité du bore ≈ −5,4 pcm/ppm |
+| Coefficients de température | `02b_…`, `02c_…` | … |
 | Assemblage 17×17 | `03_…` | … |
 | Épuisement | `04_…` | … |
 
