@@ -34,8 +34,19 @@ physiquement les résultats :
 | Enrichissement et bore | [`02a_enrichissement_bore.ipynb`](notebooks/02a_enrichissement_bore.ipynb) | Bore critique (réseau infini, UO₂ 4 %) : 5032 ± 9 ppm par ajustement, 5029 ppm par recherche GRsecant ; efficacité du bore ≈ −5,4 pcm/ppm |
 | Coefficient du modérateur | [`02b_coefficient_moderateur.ipynb`](notebooks/02b_coefficient_moderateur.ipynb) | α_mod = −36 pcm/K sans bore, s'annule à 2195 ± 50 ppm de bore ; effet dû à la densité de l'eau |
 | Coefficient Doppler | [`02c_doppler.ipynb`](notebooks/02c_doppler.ipynb) | α_D = −2,0 pcm/K à 900 K, loi approchée en √T ; captures résonnantes de l'U-238 +19 % entre 294 et 2500 K |
-| Assemblage 17×17 | `03_…` | … |
+| Assemblage 17×17 | [`03_assemblage_17x17.ipynb`](notebooks/03_assemblage_17x17.ipynb) | k∞ = 1,2739 ± 0,0002 ; F_xy = 1,061 ; convergence de la source : 3 générations (assemblage) contre ≈ 55 (rangée de 9 assemblages) |
 | Épuisement | `04_…` | … |
+
+### Assemblage 17×17 : géométrie et carte de puissance
+
+<p align="center">
+  <img src="results/03_rendu_3d.png" width="45%" alt="Rendu 3D de l'assemblage 17×17">
+</p>
+
+![Carte de puissance crayon par crayon et incertitudes](results/03_carte_puissance.png)
+
+Les crayons voisins des 24 tubes guides (« trous d'eau ») sont les plus puissants ; F_xy = 1,061, avec une incertitude
+d'environ 0,3 % par crayon.
 
 ### Spectre neutronique d'une cellule crayon
 

@@ -68,3 +68,61 @@ def modele_cellule_crayon(
         settings=reglages_criticite(**kwargs_reglages),
     )
     return modele, cellules
+
+
+def modele_assemblage(
+    enrichissement=4.0,
+    bore_ppm=1000.0,
+    t_moderateur=T_MODERATEUR,
+    t_combustible=T_COMBUSTIBLE,
+    source_ponctuelle=None,
+    **kwargs_reglages,
+):
+    """Assemblage REP 17×17 complet (matériaux + géométrie + réglages).
+
+    source_ponctuelle : None pour une source initiale uniforme dans tout le
+    combustible, ou un point (x, y, z) en cm pour une source ponctuelle
+    (utile pour étudier la convergence de la source).
+    Renvoie (modele, cellules).
+    """
+    from src.assembly import N, assemblage_17x17
+    from src.geometry import PAS
+
+    combustible = combustible_uo2(enrichissement=enrichissement, temperature=t_combustible)
+    helium = helium_jeu(temperature=T_GAINE)
+    gaine = zircaloy4(temperature=T_GAINE)
+    eau = eau_boree(bore_ppm=bore_ppm, temperature=t_moderateur)
+
+    geometrie, cellules = assemblage_17x17(combustible, helium, gaine, eau)
+    reglages = reglages_criticite(**kwargs_reglages)
+    if source_ponctuelle is None:
+        demi = N * PAS / 2
+        espace = openmc.stats.Box((-demi, -demi, -HAUTEUR / 2), (demi, demi, HAUTEUR / 2))
+        reglages.source = openmc.IndependentSource(space=espace, constraints={"fissionable": True})
+    else:
+        reglages.source = openmc.IndependentSource(space=openmc.stats.Point(source_ponctuelle))
+    modele = openmc.Model(
+        geometry=geometrie,
+        materials=openmc.Materials([combustible, helium, gaine, eau]),
+        settings=reglages,
+    )
+    return modele, cellules
+
+
+def modele_rangee(n_assemblages=9, source_ponctuelle=(0.0, 0.0, 0.0), enrichissement=4.0, bore_ppm=1000.0,
+                  **kwargs_reglages):
+    """Rangée de n assemblages avec fuites aux extrémités, source initiale ponctuelle.
+
+    Renvoie (modele, longueur) ; longueur = dimension de la rangée selon x (cm).
+    """
+    from src.assembly import rangee_assemblages
+
+    combustible = combustible_uo2(enrichissement=enrichissement)
+    helium, gaine = helium_jeu(), zircaloy4()
+    eau = eau_boree(bore_ppm=bore_ppm)
+    geometrie, _, longueur = rangee_assemblages(combustible, helium, gaine, eau, n_assemblages)
+    reglages = reglages_criticite(**kwargs_reglages)
+    reglages.source = openmc.IndependentSource(space=openmc.stats.Point(source_ponctuelle))
+    modele = openmc.Model(geometry=geometrie, materials=openmc.Materials([combustible, helium, gaine, eau]),
+                          settings=reglages)
+    return modele, longueur
