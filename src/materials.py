@@ -58,7 +58,7 @@ def zircaloy4(temperature=T_GAINE):
     return zr4
 
 
-def eau_boree(bore_ppm=1000.0, temperature=T_MODERATEUR, pression=P_PRIMAIRE):
+def eau_boree(bore_ppm=1000.0, temperature=T_MODERATEUR, pression=P_PRIMAIRE, densite=None):
     """Eau légère borée du circuit primaire.
 
     bore_ppm : concentration massique en bore naturel (ppm = mg de B par kg d'eau).
@@ -67,9 +67,13 @@ def eau_boree(bore_ppm=1000.0, temperature=T_MODERATEUR, pression=P_PRIMAIRE):
     La loi de diffusion thermique S(α,β) de l'hydrogène lié dans H2O est ajoutée
     automatiquement : sans elle, les neutrons thermiques verraient des atomes
     d'hydrogène libres, ce qui fausse le spectre thermique.
+    densite : si elle est donnée (g/cm³), elle remplace la densité calculée à partir
+    de (T, P). Sert à séparer l'effet de la densité de celui de la température
+    (notebook 02b) : la température reste alors celle des sections efficaces.
     """
     eau = openmc.model.borated_water(
-        bore_ppm, temperature=temperature, pressure=pression, name=f"Eau borée {bore_ppm:g} ppm"
+        bore_ppm, temperature=temperature, pressure=pression, density=densite,
+        name=f"Eau borée {bore_ppm:g} ppm",
     )
     eau.temperature = temperature
     return eau

@@ -42,10 +42,13 @@ def modele_cellule_crayon(
     t_moderateur=T_MODERATEUR,
     t_combustible=T_COMBUSTIBLE,
     pression=P_PRIMAIRE,
+    densite_moderateur=None,
     **kwargs_reglages,
 ):
     """Cellule crayon REP complète (matériaux + géométrie + réglages).
 
+    densite_moderateur : densité imposée de l'eau (g/cm³) ; par défaut, elle est
+    calculée à partir de t_moderateur et de la pression.
     Les arguments supplémentaires (particules, generations, inactives, graine) sont
     transmis à :func:`reglages_criticite`.
 
@@ -55,7 +58,8 @@ def modele_cellule_crayon(
     combustible = combustible_uo2(enrichissement=enrichissement, temperature=t_combustible)
     helium = helium_jeu(temperature=T_GAINE)
     gaine = zircaloy4(temperature=T_GAINE)
-    eau = eau_boree(bore_ppm=bore_ppm, temperature=t_moderateur, pression=pression)
+    eau = eau_boree(bore_ppm=bore_ppm, temperature=t_moderateur, pression=pression,
+                    densite=densite_moderateur)
 
     geometrie, cellules = cellule_crayon(combustible, helium, gaine, eau)
     modele = openmc.Model(
