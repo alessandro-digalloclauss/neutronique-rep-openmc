@@ -28,18 +28,24 @@ physiquement les résultats :
 
 ## Résultats
 
-*À compléter au fur et à mesure des notebooks.*
-
 | Étude | Notebook | Résultat principal |
 |---|---|---|
-| Cellule crayon UO₂ 4 % | [`01_pin_cell.ipynb`](notebooks/01_pin_cell.ipynb) | k∞ = … |
+| Cellule crayon UO₂ 4 % | [`01_pin_cell.ipynb`](notebooks/01_pin_cell.ipynb) | k∞ = 1,2647 ± 0,0006 (1σ), à 1000 ppm de bore et 580 K |
 | Études paramétriques | `02_…` | … |
 | Assemblage 17×17 | `03_…` | … |
 | Épuisement | `04_…` | … |
 
+### Spectre neutronique d'une cellule crayon
+
+![Spectre du flux en énergie dans le combustible et le modérateur](results/01_spectre_flux.png)
+
+Flux par unité de léthargie : bosse thermique (~0,1 eV), plateau de ralentissement en 1/E creusé par les
+résonances de capture de l'U-238 (6,67, 20,9, 36,7 eV…), plus marquées dans le combustible (autoprotection),
+et pic des neutrons de fission vers 1–2 MeV.
+
 ## Structure du dépôt
 
-```
+```text
 .
 ├── notebooks/        # études, numérotées dans l'ordre de lecture
 ├── src/              # fonctions Python réutilisables (matériaux, géométries…)

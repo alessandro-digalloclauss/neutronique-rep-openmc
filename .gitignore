@@ -14,6 +14,7 @@ endfb-*/
 # Tout est reproductible en relançant les notebooks.
 # Les résultats à conserver sont exportés en PNG/CSV dans results/.
 # ---------------------------------------------------------------
+runs/
 *.xml
 *.h5
 *.ppm
@@ -34,3 +35,6 @@ __pycache__/
 
 # Mémo de contexte pour Claude Code (local uniquement)
 CLAUDE.md
+
+# Notebooks d'exemple officiels OpenMC, gardés pour apprendre (non publiés)
+reference/
