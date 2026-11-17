@@ -30,7 +30,7 @@ physiquement les résultats :
 
 | Étude | Notebook | Résultat principal |
 |---|---|---|
-| Cellule crayon UO₂ 4 % | [`01_pin_cell.ipynb`](notebooks/01_pin_cell.ipynb) | k∞ = 1,2647 ± 0,0006 (1σ), à 1000 ppm de bore et 580 K |
+| Cellule crayon UO₂ 4 % | [`01_pin_cell.ipynb`](notebooks/01_pin_cell.ipynb) | k∞ = 1,2647 ± 0,0006 (1σ), à 1000 ppm de bore et 580 K ; modèle validé à moins de 100 pcm de la référence du benchmark VERA (problème 1) |
 | Enrichissement et bore | [`02a_enrichissement_bore.ipynb`](notebooks/02a_enrichissement_bore.ipynb) | Bore critique (réseau infini, UO₂ 4 %) : 5032 ± 9 ppm par ajustement, 5029 ppm par recherche GRsecant ; efficacité du bore ≈ −5,4 pcm/ppm |
 | Coefficient du modérateur | [`02b_coefficient_moderateur.ipynb`](notebooks/02b_coefficient_moderateur.ipynb) | α_mod = −36 pcm/K sans bore, s'annule à 2195 ± 50 ppm de bore ; effet dû à la densité de l'eau |
 | Coefficient Doppler | [`02c_doppler.ipynb`](notebooks/02c_doppler.ipynb) | α_D = −2,0 pcm/K à 900 K, loi approchée en √T ; captures résonnantes de l'U-238 +19 % entre 294 et 2500 K |
@@ -88,7 +88,7 @@ et pic des neutrons de fission vers 1–2 MeV.
 │   ├── modeles.py              #   modèles OpenMC complets, paramétrés
 │   ├── calcul.py               #   lancement des calculs, avec cache des résultats
 │   └── style.py                #   style commun des figures
-├── docs/plan.md                # plan détaillé des études
+├── docs/bilan.md               # bilan détaillé, limites et perspectives
 ├── environment.yml             # environnement conda reproductible
 └── LICENSE                     # licence MIT
 ```
@@ -138,9 +138,11 @@ Les fichiers XML et HDF5 produits par OpenMC ne sont pas versionnés : la premi�
   Annals of Nuclear Energy 82 (2015) 90–97.
 - D. A. Brown et al., *ENDF/B-VIII.0: The 8th Major Release of the Nuclear Reaction Data Library*,
   Nuclear Data Sheets 148 (2018) 1–142.
+- A. T. Godfrey, *VERA Core Physics Benchmark Progression Problem Specifications*, rév. 4,
+  CASL-U-2012-0131-004, Oak Ridge National Laboratory (2014).
 - Documentation OpenMC : <https://docs.openmc.org/>
 - Exemples officiels OpenMC : <https://github.com/openmc-dev/openmc/wiki/Example-Jupyter-Notebooks>
-- Plan détaillé des études à venir : [`docs/plan.md`](docs/plan.md)
+- Bilan détaillé, limites des modèles et perspectives : [`docs/bilan.md`](docs/bilan.md)
 
 ## Licence
 
