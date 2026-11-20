@@ -1,8 +1,8 @@
-"""Modèles OpenMC complets, construits à partir de quelques paramètres physiques.
+"""Construction de modèles OpenMC complets à partir de quelques paramètres.
 
-Une fonction de ce module renvoie un ``openmc.Model`` prêt à être lancé : c'est la
-« fonction qui construit le modèle » qu'utilisent les balayages paramétriques et les
-recherches de criticité (notebooks 02).
+Dans les notebooks 02, je dois construire le même modèle des dizaines de fois en ne
+changeant qu'un paramètre (enrichissement, bore, température…). Chaque fonction ici
+renvoie un openmc.Model complet, prêt à être lancé.
 """
 import openmc
 

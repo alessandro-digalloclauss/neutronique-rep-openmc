@@ -1,11 +1,12 @@
-"""Style graphique commun à tous les notebooks.
+"""Style des figures, le même pour tous les notebooks.
 
-Objectif : des figures lisibles en petit format (téléphone, post LinkedIn), homogènes
-d'un notebook à l'autre. À appeler une fois en début de notebook : ``appliquer_style()``.
+Je voulais des figures lisibles même en petit (sur un téléphone, dans un post LinkedIn),
+et qui se ressemblent d'un notebook à l'autre. On appelle appliquer_style() une fois,
+au début de chaque notebook.
 """
 import matplotlib as mpl
 
-# Palette sobre et contrastée, utilisée de façon cohérente dans tout le projet
+# Quelques couleurs bien contrastées, utilisées dans tout le projet
 COULEURS = {
     "rouge": "#c0392b",
     "bleu": "#2471a3",

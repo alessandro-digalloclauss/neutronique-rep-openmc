@@ -1,7 +1,7 @@
 """Matériaux d'un crayon combustible de REP.
 
-Chaque fonction renvoie un ``openmc.Material`` paramétré, pour pouvoir faire varier
-enrichissement, bore ou température dans les études paramétriques (notebook 02).
+Chaque fonction renvoie un openmc.Material dont on peut choisir les paramètres
+(enrichissement, bore, température), pour pouvoir les faire varier dans le notebook 02.
 
 Unités OpenMC : densités en g/cm³, températures en K.
 """

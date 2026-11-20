@@ -1,7 +1,7 @@
-"""Géométrie d'un assemblage REP 17×17 (type Westinghouse).
+"""Géométrie d'un assemblage REP 17×17 (type Westinghouse), pour le notebook 03.
 
-264 crayons combustibles, 24 tubes guides (logements des crayons de grappe de
-commande) et 1 tube d'instrumentation central, sur un réseau de pas 1,26 cm.
+264 crayons combustibles, 24 tubes guides (où coulissent les crayons des grappes de
+commande) et 1 tube d'instrumentation au centre, sur un réseau de pas 1,26 cm.
 """
 import openmc
 
@@ -37,10 +37,12 @@ def carte_assemblage():
 
 
 def reseau_17x17(combustible, helium, gaine, moderateur):
-    """Réseau 17×17 d'un assemblage, sans frontière (brique réutilisable).
+    """Construit le réseau 17×17 d'un assemblage, sans les bords.
 
-    Renvoie (reseau, cellules) : cellules["combustible"] est la cellule
-    combustible de l'univers crayon, répétée 264 fois dans le réseau.
+    Je le sépare de assemblage_17x17 pour pouvoir le réutiliser dans la rangée
+    d'assemblages (rangee_assemblages).
+    Renvoie (reseau, cellules) : cellules["combustible"] est la cellule combustible
+    du crayon, répétée 264 fois dans le réseau.
     """
     # --- Univers « crayon combustible » (identique à la cellule crayon du notebook 01)
     s_pastille = openmc.ZCylinder(r=R_PASTILLE)
@@ -76,8 +78,9 @@ def reseau_17x17(combustible, helium, gaine, moderateur):
 
 
 def assemblage_17x17(combustible, helium, gaine, moderateur, hauteur=HAUTEUR):
-    """Assemblage seul, bords réfléchissants sur les 6 faces (réseau infini d'assemblages).
+    """Un assemblage avec des bords réfléchissants sur les 6 faces.
 
+    Comme pour la cellule crayon, ça revient à un réseau infini d'assemblages identiques.
     Renvoie (geometrie, cellules).
     """
     reseau, cellules = reseau_17x17(combustible, helium, gaine, moderateur)
@@ -89,11 +92,11 @@ def assemblage_17x17(combustible, helium, gaine, moderateur, hauteur=HAUTEUR):
 
 
 def rangee_assemblages(combustible, helium, gaine, moderateur, n_assemblages=9, hauteur=HAUTEUR):
-    """Rangée de n assemblages selon x, avec fuites (vide) aux deux extrémités.
+    """Rangée de n assemblages selon x, avec des fuites (vide) aux deux bouts.
 
-    Réfléchissante en y et en z : c'est une « bande » de cœur infinie dans ces
-    directions. Système grand devant le parcours des neutrons, utilisé pour
-    montrer une convergence lente de la source (notebook 03).
+    Réfléchissante en y et en z : c'est une « bande » de cœur. Je l'utilise dans le
+    notebook 03 pour avoir un système beaucoup plus grand que le parcours d'un neutron,
+    où la source de fission met du temps à converger.
     Renvoie (geometrie, cellules, longueur).
     """
     reseau, cellules = reseau_17x17(combustible, helium, gaine, moderateur)

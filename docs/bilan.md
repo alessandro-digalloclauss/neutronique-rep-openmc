@@ -1,7 +1,8 @@
 # Bilan du projet et perspectives
 
-Ce document était au départ le plan des notebooks 02 à 04. Il fait maintenant le point : ce qui a été réalisé,
-les écarts avec le plan initial, les limites des modèles, et les études qui restent à faire.
+Au départ, ce document était mon plan pour les notebooks 02 à 04. Une fois le projet avancé, je l'ai transformé en
+bilan : ce que j'ai réellement fait, ce qui a changé par rapport au plan, les limites de mes modèles, et ce que je
+pourrais faire ensuite.
 
 ---
 
@@ -32,9 +33,9 @@ les écarts avec le plan initial, les limites des modèles, et les études qui r
 
 ### 02 — Études paramétriques (trois notebooks)
 
-Le plan prévoyait six parties (2a à 2f). Les parties enrichissement et bore critique ont été regroupées dans le
-notebook **02a** ; le coefficient du modérateur est devenu **02b**, le Doppler **02c**. Les deux options (2e, 2f) n'ont
-pas été faites (voir *Perspectives*).
+Mon plan prévoyait six parties (2a à 2f). En le réalisant, j'ai regroupé l'enrichissement et le bore critique dans
+le notebook **02a** ; le coefficient du modérateur est devenu **02b**, le Doppler **02c**. Je n'ai pas fait les deux
+options (2e, 2f) : elles sont dans les *Perspectives*.
 
 - **02a** : balayage de l'enrichissement de 0,711 à 5 % (k∞ = 1 vers 1 % d'enrichissement, à 0 ppm), balayage du bore
   de 0 à 6000 ppm, efficacité différentielle du bore −5,4 pcm/ppm à 1000 ppm. Bore critique du réseau infini par
@@ -95,7 +96,7 @@ cas 1A (isotherme à 565 K) et 1B à 1D (combustible à 600, 900 et 1200 K). La 
 
 ---
 
-## Méthodes communes
+## Méthodes que j'ai utilisées dans tout le projet
 
 - **Code partagé** dans `src/` : matériaux, géométries (crayon, assemblage, rangée), modèles paramétrés, lancement
   des calculs, style des figures.
@@ -112,7 +113,7 @@ cas 1A (isotherme à 565 K) et 1B à 1D (combustible à 600, 900 et 1200 K). La 
 
 ---
 
-## Limites communes des modèles
+## Limites de mes modèles
 
 - **Pas de fuites** : cellule crayon et assemblage ont des bords réfléchissants (k∞, pas k_eff). Les bores critiques
   et taux de combustion obtenus ne sont pas ceux d'un cœur réel.
@@ -129,7 +130,7 @@ cas 1A (isotherme à 565 K) et 1B à 1D (combustible à 600, 900 et 1200 K). La 
 
 ## Perspectives
 
-Par ordre d'intérêt :
+Ce que je ferais ensuite, par ordre d'intérêt :
 
 1. **Suite de la validation VERA** : comprendre l'écart du cas 1B (autres graines, bibliothèque ENDF/B-VII.x plus
    proche de la référence), puis traiter le problème 2 (assemblage 2D), proche du notebook 03.

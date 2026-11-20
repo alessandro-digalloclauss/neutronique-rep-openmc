@@ -1,30 +1,39 @@
 # Neutronique d'un cœur REP avec OpenMC
 
-Étude neutronique progressive d'un réacteur à eau pressurisée (REP), du crayon combustible
-isolé jusqu'à l'assemblage 17×17 et à son évolution sous irradiation, réalisée avec le code
-Monte-Carlo [OpenMC](https://docs.openmc.org/).
+Projet personnel réalisé pour apprendre la neutronique des réacteurs à eau pressurisée (REP) avec le code
+Monte-Carlo [OpenMC](https://docs.openmc.org/). Je suis étudiant ingénieur en filière énergie, et je voulais
+comprendre par la pratique ce que j'avais vu en cours : je suis parti d'un seul crayon combustible, puis je suis
+passé à un assemblage 17×17 complet et à l'évolution du combustible pendant son séjour en réacteur.
 
-> Projet personnel d'apprentissage — étudiant ingénieur, spécialisation nucléaire.
+Chaque notebook explique la physique, les choix que j'ai faits, et aussi les erreurs que j'ai rencontrées en
+chemin et comment je les ai corrigées.
 
-## Objectif
+## Étapes du projet
 
-Construire, étape par étape, des modèles neutroniques de complexité croissante et interpréter
-physiquement les résultats :
-
-1. **Cellule crayon** (*pin cell*) : facteur de multiplication infini k∞ et spectre neutronique.
-2. **Études paramétriques** : sensibilité de k∞ à l'enrichissement, à la concentration en bore
-   et à la température du modérateur (coefficient de température).
-3. **Assemblage REP 17×17** : tubes guides, carte de puissance crayon par crayon.
-4. **Épuisement** : évolution de k∞ avec le burn-up et production de plutonium.
+1. **Cellule crayon** (*pin cell*) : facteur de multiplication infini k∞ et spectre des neutrons.
+2. **Études paramétriques** : effet de l'enrichissement, de la concentration en bore et des températures (eau et
+   combustible) sur k∞, et coefficients de température.
+3. **Assemblage REP 17×17** : tubes guides, carte de puissance crayon par crayon, convergence de la source.
+4. **Épuisement** : évolution de k∞ avec le taux de combustion et production de plutonium.
 
 ## Méthode
 
-- **Code** : OpenMC 0.16 — transport des neutrons par méthode Monte-Carlo en énergie continue.
-- **Données nucléaires** : bibliothèque ENDF/B-VIII.0 au format HDF5, fournie par l'équipe OpenMC.
-- **Calcul de criticité** : itérations sur les sources de fission (cycles inactifs pour converger
-  la source, cycles actifs pour accumuler les statistiques) ; chaque résultat est donné avec
-  son incertitude statistique (1σ).
+- **Code** : OpenMC 0.16, transport des neutrons par méthode Monte-Carlo en énergie continue.
+- **Données nucléaires** : bibliothèque ENDF/B-VIII.0 au format HDF5, fournie par l'équipe d'OpenMC.
+- **Incertitudes** : chaque résultat est donné avec son incertitude statistique (1σ), et je vérifie les résultats
+  par des contrôles indépendants (bilan neutronique, symétrie de l'assemblage, comparaison à un benchmark publié).
 - **Organisation** : un notebook par étude dans `notebooks/`, fonctions communes dans `src/`.
+
+## Ce que j'ai appris
+
+- Construire un modèle Monte-Carlo de réacteur, de la cellule crayon à l'assemblage, et vérifier sa géométrie.
+- Interpréter les résultats avec la physique du cours : spectre, autoprotection, sous-modération, effet Doppler,
+  empoisonnement xénon et samarium, formation du plutonium.
+- Traiter les incertitudes : ajustements pondérés, χ² réduit, propagation d'incertitude, corrélation entre
+  générations.
+- Me méfier des résultats : un plutonium trop élevé m'a fait découvrir qu'une approximation d'OpenMC surestimait de
+  30 % les captures de l'U-238 (notebook 04), et une comparaison au benchmark VERA a validé mon modèle de cellule
+  crayon à moins de 100 pcm.
 
 ## Résultats
 
@@ -45,16 +54,16 @@ physiquement les résultats :
 
 ![Carte de puissance crayon par crayon](results/03_assemblage_17x17/carte_puissance.png)
 
-Les crayons voisins des 24 tubes guides (« trous d'eau ») sont les plus puissants ; F_xy = 1,061, avec une incertitude
-d'environ 0,3 % par crayon.
+Les crayons voisins des 24 tubes guides (« trous d'eau ») sont les plus puissants : l'eau des tubes ralentit
+les neutrons, qui provoquent plus de fissions autour. F_xy = 1,061, avec une incertitude d'environ 0,3 % par crayon.
 
 ### Épuisement : le plutonium prend le relais de l'uranium 235
 
 ![Part des fissions par nucléide en fonction du taux de combustion](results/04_epuisement/fissions.png)
 
 Au fil de l'irradiation, l'U-235 s'épuise et le Pu-239 formé par capture sur l'U-238 fissionne à son tour : à
-50 GWj/t, les deux tiers des fissions viennent du plutonium. Le notebook montre aussi qu'un calcul des taux de
-réaction par flux multigroupe, sans autoprotection, surestime de 30 % la production de plutonium.
+50 GWj/t, les deux tiers des fissions viennent du plutonium. C'est le résultat qui m'a le plus surpris dans ce
+projet.
 
 ### Spectre neutronique d'une cellule crayon
 
